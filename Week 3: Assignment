@@ -1,0 +1,105 @@
+1)Write a function intreverse(n) that takes as input a positive integer n and returns the integer obtained by reversing the digits in n.
+
+Here are some examples of how your function should work.
+
+>>> intreverse(783)
+387
+>>> intreverse(242789)
+987242
+>>> intreverse(3)
+3
+Sol :-
+
+def intreverse(n):
+    reversed_str = str(n)[::-1]
+    reversed_int = int(reversed_str)
+    return reversed_int
+
+
+2)Write a function matched(s) that takes as input a string s and checks if the brackets "(" and ")" in s are matched: that is, every "(" has a matching ")" after it and every ")" has a matching "(" before it. Your function should ignore all other symbols that appear in s. Your function should return True if s has matched brackets and False if it does not.
+
+Here are some examples to show how your function should work.
+
+ 
+>>> matched("zb%78")
+True
+>>> matched("(7)(a")
+False
+>>> matched("a)*(?")
+False
+>>> matched("((jkl)78(A)&l(8(dd(FJI:),):)?)")
+True
+
+Sol:-
+
+def matched(s):
+    balance = 0
+    for char in s:
+        if char == '(':
+            balance += 1
+        elif char == ')': 
+            balance -= 1
+            if balance < 0:
+                return False
+    return balance == 0
+
+3)Write a function sumprimes(l) that takes as input a list of integers l and retuns the sum of all the prime numbers in l.
+
+Here are some examples to show how your function should work.
+
+>>> sumprimes([3,3,1,13])
+19
+>>> sumprimes([2,4,6,9,11])
+13
+>>> sumprimes([-3,1,6])
+0
+
+Sol:-
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def sumprimes(l):
+   
+    return sum(n for n in l if is_prime(n))
+
+
+
+    
+import ast
+
+def tolist(inp):
+  inp = "["+inp+"]"
+  inp = ast.literal_eval(inp)
+  return (inp[0],inp[1])
+
+def parse(inp):
+  inp = ast.literal_eval(inp)
+  return (inp)
+
+fncall = input()
+lparen = fncall.find("(")
+rparen = fncall.rfind(")")
+fname = fncall[:lparen]
+farg = fncall[lparen+1:rparen]
+
+if fname == "intreverse":
+   arg = parse(farg)
+   print(intreverse(arg))
+elif fname == "matched":
+   arg = parse(farg)
+   print(matched(arg))
+elif fname == "sumprimes":
+   arg = parse(farg)
+   print(sumprimes(arg))
+else:
+   print("Function", fname, "unknown")
