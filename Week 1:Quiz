@@ -16,6 +16,7 @@ def g(n):
         if n%i == 0:
            s = s+1
     return(s)
+
 ANS :- 2
 
 3) Consider the following function f.
